@@ -1,0 +1,33 @@
+class Solution {
+public:
+    string getHint(string secret, string guess) {
+        int bulls = 0;
+        int cows = 0;
+        vector<int> s(10,0); //we are creating a frequency array of size 10 (digits= 0 to 9), initializing it with 0 
+        vector<int> g(10,0);
+        for(int i = 0; i<secret.length(); i++) //iterating through the given string
+        {
+            if(secret[i]==guess[i]) 
+            {
+                bulls++;
+
+            }
+            else{
+                s[secret[i]-'0']++; //character to integer
+                g[guess[i]-'0']++;
+
+            }
+        }
+        for(int i = 0; i<10; i++) // iterating the frequency array
+        {
+            cows+=min(s[i],g[i]); //to get the minimum value from both the arrays
+
+        }
+        string ans = "";
+        ans+= to_string(bulls);
+        ans+='A'; //to concatenate "A" after the number of bulls
+        ans+= to_string(cows);
+        ans+='B';
+        return ans;
+    }
+};
